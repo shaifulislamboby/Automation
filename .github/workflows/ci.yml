@@ -1,0 +1,28 @@
+name: Java CI Main
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+      - name: Check code style
+        run: ./gradlew checkstyleMain checkstyleTest
+
+      - name: Run tests
+        run: ./gradlew test
+
