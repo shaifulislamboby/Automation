@@ -1,14 +1,15 @@
-# Network-Automation (Java)
-
----
+# Automation (Java)
 
 
-# How To
+## Getting started
 
-### Requirements:
-This project will contain APIs for doing network automation tasks.
-Using AWX.
+Make sure you have docker & docker-compose installed and running.
 
-First Task:
-- Make this spring server functional, meaning if i run it and go to localhost:8080 then I shall see some message , like welcome to Network automation 
-- Create a login and logout page where nay user can login and logout to the server.
+Start application:
+
+```bash
+docker-compose up
+```
+
+Now visit http://localhost:8080/ to see the results and you shall see the result.
+
