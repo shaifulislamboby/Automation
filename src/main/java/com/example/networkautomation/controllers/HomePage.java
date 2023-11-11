@@ -14,6 +14,10 @@ public class HomePage {
     @Value("${welcomeMessage}")
     private String message;
 
+    @GetMapping("/hello")
+    public String index(Model model){
+        model.addAttribute("message", message);
+        return "hello";
     @GetMapping("/")
     public String index() {
         return message;
