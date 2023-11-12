@@ -18,7 +18,7 @@ FROM openjdk:20-ea-1-jdk-slim as development
 WORKDIR /code/
 
 # Copy the JAR file from the build environment to the final image
-COPY --from=builder /code/build/libs/network-automation.jar /code/app.jar
+COPY --from=builder /code/build/libs/Network-Automation.jar /code/app.jar
 
 # Expose the port your Spring Boot application will listen on
 EXPOSE 8080
