@@ -1,18 +1,25 @@
-name: Java CI Main
+name: automation-ci-cd
 
-on: [push]
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    branches:
+      - "*"
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Java
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '21'
           distribution: 'adopt'
@@ -26,3 +33,60 @@ jobs:
       - name: Run tests
         run: ./gradlew test
 
+
+  docker-build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Validate Docker Compose file
+        run: docker-compose config --quiet
+
+      - name: Start Docker Compose services
+        run: docker-compose up -d
+
+      - name: Wait for services to start
+        run: |
+          timeout=300  # Adjust timeout as needed
+          while [ $timeout -gt 0 ]; do
+            if docker-compose ps | grep "Up" >/dev/null; then
+              echo "Services are up and running."
+              exit 0
+            fi
+            sleep 5
+            ((timeout-=5))
+          done
+          echo "Services did not start within the specified timeout."
+          exit 1
+
+      - name: Test / endpoint
+        continue-on-error: true
+        run: |
+          endpoint_result=$(curl -v -s -o /dev/null -w "%{http_code}" --insecure http://127.0.0.1:8080/)
+          if [ $endpoint_result -eq 200 ]; then
+            echo "Endpoint / returned HTTP 200 OK."
+          else
+            echo "Endpoint / did not return HTTP 200 OK. Returned: $endpoint_result"
+            exit 1
+          fi
+      - name: Install Python and pip
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Choose the appropriate Python version
+
+      - name: Install HTTPie
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install httpie
+      - name: Test / endpoint with HTTPi
+        run: |
+          http_status=$(http --ignore-stdin --check-status --timeout=30 http://127.0.0.1:8080/)
+          if [[ $http_status == *"I am welcoming you to this Automation Application"* ]]; then
+            echo "Endpoint / returned HTTP 200 OK."
+          else
+            echo "Endpoint / did not return HTTP 200 OK. Returned: $http_status"
+            exit 1
+          fi

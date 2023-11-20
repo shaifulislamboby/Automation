@@ -6,6 +6,9 @@ services:
       context: .
       dockerfile: Dockerfile
       target: development
+    container_name: web
+    depends_on:
+      - postgres
     command: java -jar app.jar
     ports:
       - "8080:8080"
@@ -14,15 +17,33 @@ services:
     networks:
       - backend
     environment: &environment-web
-      DB_ENGINE: django.db.backends.postgresql
-      DB_HOST: db
-      DB_NAME: postgres
-      DB_PASSWORD: postgres
-      DB_PORT: 5432
-      DB_USER: postgres
+      DATA_SOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      DATA_SOURCE_HOST: postgres
+      DATA_SOURCE_NAME: postgres
+      DATA_SOURCE_PASSWORD: automation
+      DATA_SOURCE_PORT: 5432
+      DATA_SOURCE_USER: automation
       CACHES_LOCATION: cache:11211
     stdin_open: true
     tty: true
 
+  postgres:
+    image: postgres:14.2
+    container_name: postgres-db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: automation
+      POSTGRES_DB: postgres
+      POSTGRES_USER: automation
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+
 networks:
   backend: { }
+
+volumes:
+  postgres_data:
