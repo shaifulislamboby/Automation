@@ -9,11 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class NetworkAutomationApplication {
-    public static void main(String[] args) {
-        try {
-            SpringApplication.run(NetworkAutomationApplication.class, args);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws Throwable{
+        SpringApplication.run(NetworkAutomationApplication.class, args);
     }
 }
