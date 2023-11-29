@@ -10,15 +10,26 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+
+/**
+ * This is a Javadoc comment. It provides information about the method or class.
+ * You can include a description, parameter explanations, return value, exceptions, etc.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurity {
+
+
+    /**
+     * This is a Javadoc comment. It provides information about the method or class.
+     * You can include a description, parameter explanations, return value, exceptions, etc.
+     */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((request) -> request
-                        .requestMatchers( "/", "/home").permitAll()
-                        .anyRequest().authenticated())
+                        .requestMatchers("/", "/home").permitAll()
+                        .anyRequest().permitAll())
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/hello")
@@ -29,8 +40,12 @@ public class WebSecurity {
         return http.build();
     }
 
+    /**
+     * This is a Javadoc comment. It provides information about the method or class.
+     * You can include a description, parameter explanations, return value, exceptions, etc.
+     */
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         UserDetails user =
                 User.withDefaultPasswordEncoder()
                         .username("user")

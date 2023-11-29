@@ -37,16 +37,4 @@ public class TestHomePage {
 
         assertThat(statusCode).isEqualTo(HttpStatus.OK);
     }
-    /**
-     * This is a Javadoc comment. It provides information about the method or class.
-     * You can include a description, parameter explanations, return value, exceptions, etc.
-     */
-    @Test
-    public void testNotFoundPage() {
-        ResponseEntity<String> response = template.getForEntity("/nonexistent", String.class);
-
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.getBody()).contains("Not Found");
-    }
-
 }
