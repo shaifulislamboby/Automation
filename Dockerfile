@@ -21,7 +21,7 @@ WORKDIR /code/
 COPY --from=builder /code/build/libs/Network-Automation.jar /code/app.jar
 
 # Expose the port your Spring Boot application will listen on
-EXPOSE 8080
+EXPOSE 8000
 
 # Define environment variables, if needed
 # ENV VAR_NAME=value
