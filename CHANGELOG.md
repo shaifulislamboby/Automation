@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.
   variable.
 - Added basic ci to check code formats and run test.
 - Added basic docker and docker compose file for initialization of application using docker.
-- Added a static user to login.
+- Added a static user to login in the application.
 
 ### Changed
 

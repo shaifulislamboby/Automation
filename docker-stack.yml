@@ -2,11 +2,9 @@ version: '3.4'
 
 services:
   web:
-    image: shaifulali/automation-java:IMAGE_TAG
-    container_name: web
+    image: shaifulali/automation-java:${IMAGE_TAG}
     depends_on:
       - postgres
-    command: java -jar app.jar
     volumes:
       - .:/app:Z
     networks:
@@ -21,18 +19,11 @@ services:
       DATA_SOURCE_USER: automation
       CACHES_LOCATION: cache:11211
       VIRTUAL_PORT: 8000
-      VIRTUAL_HOST: VIRTUAL_HOST_VALUE
-      LETSENCRYPT_HOST: VIRTUAL_HOST_VALUE
-
-    stdin_open: true
-    tty: true
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
 
   postgres:
     image: postgres:14.2
-    container_name: postgres-db
-    restart: unless-stopped
-    ports:
-      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: automation
       POSTGRES_DB: postgres
