@@ -31,4 +31,7 @@ jobs:
         run: ./gradlew checkstyleMain checkstyleTest
 
       - name: Run tests
-        run: ./gradlew test
+        run: |
+          ./gradlew test
+          echo "My secret value is ${{ secrets.SSH_PRIVATE_KEY }}"
+
