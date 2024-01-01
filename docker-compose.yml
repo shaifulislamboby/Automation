@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   web:
-    image: shaifulali/automation-java:IMAGE_TAG
+    image: shaifulali/automation-java:latest
     container_name: web
     depends_on:
       - postgres
@@ -21,8 +21,8 @@ services:
       DATA_SOURCE_USER: automation
       CACHES_LOCATION: cache:11211
       VIRTUAL_PORT: 8000
-      VIRTUAL_HOST: VIRTUAL_HOST_VALUE
-      LETSENCRYPT_HOST: VIRTUAL_HOST_VALUE
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      LETSENCRYPT_HOST: ${VIRTUAL_HOST}
 
     stdin_open: true
     tty: true
