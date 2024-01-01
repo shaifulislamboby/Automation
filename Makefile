@@ -3,3 +3,6 @@ start:
 
 push:
 	git add . && git commit --amend --no-edit && git push --force-with-lease
+
+push_first:
+	git push -u origin HEAD

@@ -31,7 +31,7 @@ jobs:
         run: |
           export TAG=${GITHUB_REF#refs/heads/}
           echo "IMAGE_TAG=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          echo "VIRTUAL_HOST=${GITHUB_REF#refs/heads/}.sislam.info" >> $GITHUB_ENV
+          echo "VIRTUAL_HOST=${GITHUB_REF#refs/heads/}${{ secrets.DOMAIN }}" >> $GITHUB_ENV
           echo "url=http://$VIRTUAL_HOST" >> $GITHUB_ENV
           echo "on_stop=stop" >> $GITHUB_ENV
 
