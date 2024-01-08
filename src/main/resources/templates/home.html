@@ -36,7 +36,7 @@
             text-align:center;
             text-decoration:none;
             display:inline-block;
-            font-size:16px;
+            font-size:24px;
             border-radius:4px;
         }
         .cen{
@@ -55,13 +55,14 @@
     <div class="topnav" style="margin:2">
         <a class="active" href="">Home</a>
         <a th:href="@{/hello}">Hello</a>
+        <a class="active" th:href="@{/signup}" style="right:5px;position:absolute;" onmouseover="this.style.backgroundColor='#00D100'" onmouseout="this.style.backgroundColor='#04AA6D'">
+            Signin / Signup</a>
     </div>
 
     <h2 th:text="${message}" style="margin:50px"></h2>
 
-    <div class="btn cen" >
-        <a th:href="@{/hello}">Let's Get Started</a>
-    </div>
+
+    <a class="btn cen" th:href="@{/hello}">Let's Get Started</a>
 
 
 </body>

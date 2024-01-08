@@ -32,6 +32,7 @@
             margin:0;
             padding:0;
             box-sizing:border-box;
+            top:0;
         }
         .body{
             min-height:100vh;
@@ -52,12 +53,12 @@
             border-radius:4px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, .3);
         }
-        .container form h1{
+        h1{
             text-align:center;
             margin-bottom:24px;
             color:#222;
         }
-        .container form .form-control{
+        .form-control{
             width:90%;
             height:40px;
             background:white;
@@ -66,10 +67,10 @@
             margin:10px 0 18px 10px;
             padding:0 10px;
         }
-        .container form .btn{
+        .btn{
             margin-left:50%;
             transform:translateX(-50%);
-            width:120px;
+            width:300px;
             height:34px;
             border:none;
             border-radius:5px;
@@ -80,6 +81,23 @@
             text-transform:uppercase;
             color:white;
         }
+        .con{
+            width:100%;
+            height:100%;
+            padding:20px;
+            background:white;
+            border-radius:4px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, .3);
+        }
+        .newHeader{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background: #eee;
+            font-family: sans-serif;
+        }
     </style>
 </head>
 <body style="background:#eee">
@@ -88,35 +106,41 @@
         <a class="active" href="">Hello</a>
     </div>
 
-    <div class="log body">
-        <div class="container">
-            <form method="post" th:action="@{/login}">
-                <h1>Login Form</h1>
-                <div th:if="${param.error}" style="color:red; text-align:center">
-                    Invalid User Id or Password!!
-                </div>
+    <div class = "newHeader">
 
-                <div th:if="${param.logout}" style="color:green; text-align:center">
-                    You've logged out
-                </div>
-                <div class="form-group">
-                    <label style="margin-left:10px">User name:
-                        <input type="text" name="username" class="form-control"/>
-                    </label>
-                </div>
+        <div class="topnav" style="position:absolute; margin-bottom:400px; margin-left:40px; width:490px;">
+            <a th:href="@{/signup}">Sign Up</a>
+            <a class="active" href="">Sign In</a>
+        </div>
 
-                <div class="form-group">
-                    <label style="margin-left:10px">Password:
-                        <input type="password" name="password" class="form-control"/>
-                    </label>
-                </div>
+        <div class="log body">
+            <div class="container">
+                <form method="post" th:action="@{/signin}">
+                    <h1>Login Form</h1>
+                    <div th:if="${param.error}" style="color:red; text-align:center">
+                        Invalid User Id or Password!!
+                    </div>
 
-                <div>
-                    <input type="submit" value="Sign In" class="btn"/>
-                </div>
-            </form>
+                    <div th:if="${param.logout}" style="color:green; text-align:center">
+                        You've logged out
+                    </div>
+                    <div class="form-group">
+                        <label style="margin-left:10px">User name:
+                            <input type="text" name="username" class="form-control"/>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="margin-left:10px">Password:
+                            <input type="password" name="password" class="form-control"/>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="submit" value="Sign In" class="btn"/>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
 </body>
 </html>
