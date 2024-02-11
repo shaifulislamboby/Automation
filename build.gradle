@@ -8,6 +8,7 @@ plugins {
 
 group = 'com.example'
 version = ''
+
 tasks.verifyGoogleJavaFormat.ignoreFailures = false
 
 java {
@@ -29,20 +30,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    //  Temporary explicit version to fix Thymeleaf bug
-    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.1.RELEASE'
-    implementation 'org.springframework.security:spring-security-test'
     implementation 'com.puppycrawl.tools:checkstyle:8.45'
     // Database Connectivity
-    implementation 'org.springframework.data:spring-data-jpa:3.2.1'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.postgresql:postgresql'
 
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'org.modelmapper:modelmapper:2.4.0'
 
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-
+    implementation 'org.springframework.boot:spring-boot-devtools'
 
 
 }

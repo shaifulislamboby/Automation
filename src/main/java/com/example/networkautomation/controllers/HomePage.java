@@ -22,6 +22,12 @@ public class HomePage {
         return "home";
     }
 
+    /**
+     * Home endpoint.
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/home")
     public String homePage(Model model) {
         model.addAttribute("message", message);
